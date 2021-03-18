@@ -5,19 +5,19 @@ const PORT = process.env.PORT || 8080;
 
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/public/index.html');
+    res.sendFile(__dirname + '/views/index.html');
 });
 
 app.get('/js', (req, res) => {
-    res.sendFile(__dirname + '/public/javascript.html');
+    res.sendFile(__dirname + '/views/javascript.html');
 });
 
 app.get('/node', (req, res) => {
-    res.sendFile(__dirname + '/public/node.html');
+    res.sendFile(__dirname + '/views/node.html');
 });
 
 app.get('/express', (req, res) => {
-    res.sendFile(__dirname + '/public/express.html');
+    res.sendFile(__dirname + '/views/express.html');
 });
 
 

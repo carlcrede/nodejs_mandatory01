@@ -1,23 +1,23 @@
 const express = require('express');
 const app = express();
+app.use(express.static("public"));
 
 const PORT = process.env.PORT || 8080;
 
-
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/views/index.html');
+    res.sendFile(__dirname + '/public/index.html');
 });
 
 app.get('/js', (req, res) => {
-    res.sendFile(__dirname + '/views/javascript.html');
+    res.sendFile(__dirname + '/public/javascript.html');
 });
 
 app.get('/node', (req, res) => {
-    res.sendFile(__dirname + '/views/node.html');
+    res.sendFile(__dirname + '/public/node.html');
 });
 
 app.get('/express', (req, res) => {
-    res.sendFile(__dirname + '/views/express.html');
+    res.sendFile(__dirname + '/public/express.html');
 });
 
 

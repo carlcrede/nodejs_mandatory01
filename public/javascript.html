@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap css -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="./site.css">
+    <link rel="stylesheet" href="./prism.css">
+
+    <title>NodeJS Mandatory</title>
+
+</head>
+<body>
+    <nav class="navbar sticky-top navbar-expand-sm navbar-dark bg-dark px-3 justify-content-center">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/"><i class="fas fa-home"></i> Start</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="/js"><i class="fab fa-js-square"></i> Javascript</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/node"><i class="fab fa-node-js"></i> Node.js</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/express"><i class="fas fa-shipping-fast"></i> Express.js</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container py-2">
+        <div id="javascript" class="row justify-content-center">
+            <div class="col-8">
+                <div class="h3 text-center">Javascript</div>
+                    <div class="accordion opacity-4" id="js_accordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#js_1">
+                                    Datatypes & structures
+                                </button>
+                            </h2>
+                            <div id="js_1" class="accordion-collapse collapse" data-bs-parent="#js_accordion">
+                                <div class="accordion-body bg-light">
+                                    <div id="primitives">
+                                        <h6>Primitives</h6>
+                                        <p><b>String: </b>a set of characters, which each correspond to a 16-bit unsigned integer. Strings are <b>immutable</b> in JS, which means they cannot be changed after creation.<br>
+                                            To initilize a string, use single or double quotiation marks or backticks.</p>
+<pre id="test" class="language-javascript">
+<code>s = 'Sinlge quotiation marks';
+s = "Double quotiation marks";
+s = `backticks`;
+</code></pre><br>
+                                        <p><b>Number: </b>holds integers and floats as double-precision 64-bit binary value. Very large integers can be stored in the <b>BigInt</b> type.</p>
+<pre class="language-javascript">
+<code>num = 10;
+num_as_string = "10";
+
+// parsing string to Number
+parseInt(num_as_string); // with parseInt()
+Number(num_as_string) // with typecast
+</code></pre><br>
+                                        <p><b>Boolean: </b>can be either true og false. Often used to determine if a block of code should be run on not.</p>
+<pre class="language-javascript">
+<code>b = true;
+if (b) {
+    console.log("b is true!");
+} // expected output: "b is true!"
+</code></pre><br>                              
+                                        <p><b>Null & undefined: </b>Null has only value, which is <b>null.</b> It can be used to indicate that a variable points to no object. 
+                                            Undefined means that a variable has not been assigned a value, thus the value is <b>undefined.</b></p>       
+<pre class="language-javascript">
+<code>let variable;
+console.log(variable); // exprected output: undefined
+</code></pre><br>                                      
+                                    </div>
+                                    <div id="objects">
+                                        <h6>Objects & datastructures</h6>
+                                        <p><b>Objects: </b>can be seen as a collection of properties. Properties can be added as a "key" with a corresponding "value". These values can be of any type.</p>
+<pre class="line-numbers language-javascript">
+<code>const o = {}; // initialization of empty object
+o.id = "123"; // adding "id" property with value "123"
+const person = {name: "John"} // object initialization using curly-braces.
+person.age = 25; // adding new property "age"
+delete person.name; // deleting "name" property
+person.o = o;
+console.log(person); // expected output: {name: "John", o: {…}}
+</code></pre><br>
+                                        <p><b>Arrays: </b>is an object that can contain multiple values of any type. They are zero-indexed, meaning the first element of an array has index 0. 
+                                            Elements in an array can be added, deleted and accessed using built-in functions. We can also loop the array with a for/foreach loop and use lambdas such as .filter(), .map() and .reduce()</p>
+<pre class="line-numbers language-javascript">
+<code>const friends = [];
+const john = {
+    name: "John",
+    age: 22
+};
+friends.push(john); // adds element to end of array
+friends.pop();  // removes last element
+friends.slice();  // creates a copy of the array
+friends[0]  // get the first element
+</code></pre><br>                                           
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#js_2">
+                                    Variables
+                                </button>
+                            </h2>
+                            <div id="js_2" class="accordion-collapse collapse" data-bs-parent="#js_accordion">
+                                <div class="accordion-body bg-light">
+                                    <div id="variables">
+                                        <h6>let, const & var</h6>
+                                        <p><b>let</b> declares a block-scoped local variable. <b>var</b> declares a variable in the global-scope. Finally <b>const</b> declares a constant value in the block-scope.</p>
+<pre class="line-numbers language-javascript">
+<code>{   // this is a new scope block
+    let scopeVar = "abc";
+    {
+        // this is a nested scope that inherits from the prevoius scope
+        scopeVar = 123;
+    }
+    console.log(scopeVar); // output: "abc"
+}
+
+{
+    let scopeVar = "abc";
+    {
+        let scopeVar = 123;
+        console.log(scopeVar);  // output: 123
+    }
+    console.log(scopeVar);   // output: "abc"
+}
+</code></pre><br>
+                                        <p>Variables can be used within string literals, using backticks and ${} for an expression. By using this it is possible to output complex data through strings.</p>
+<pre class="language-javascript">
+<code>const person = {firstName: "John", lastName: "Johnson", age: 22};
+console.log(`Hello! My name is ${person.firstName} ${person.lastName} and I'm ${person.age} years old!`);
+// output: "Hello! My name is John Johnson and I'm 22 years old!";
+</code></pre><br>  
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#js_3">
+                                    Functions
+                                </button>
+                            </h2>
+                            <div id="js_3" class="accordion-collapse collapse" data-bs-parent="#js_accordion">
+                                <div class="accordion-body bg-light">
+                                    <div id="normal">
+                                        <h6>Functions</h6>
+                                        <p><b>Functions</b> are a set of statements that perform some task such as calculating a value. They take some input and return an output.</p>
+<pre class="language-javascript">
+<code>// function definition / declaration
+function myFirstFunction(message) {
+    return "Your message: " + message;
+}
+console.log(myFirstFunction("Hello!"));  // output: "Your message: Hello!"
+</code></pre><br>
+                                    </div>
+                                    <div id="arrow">
+                                        <h6>Function expressions & Arrow functions</h6>
+                                        <p>It is possible to define an <b>anonymous function</b> inside an expression. For example you can assign an anonymous function to a variable or constant.
+                                        Another way of using this concept is known as <b>arrow funtions</b>, which is a shorthand / more compact way of defining a function expression (though more limited).
+                                    Furthermore arrow functions / anonymous functions are often used as <b>callbacks</b>, which is described in the next section.</p>
+<pre class="line-numbers language-javascript">
+<code>const x = function() {} // defining an anonymous function and assigns it to x
+const myArrowFunction = () => {
+    console.log("Hello from the anonymous function which is also an arrow function");
+}
+
+// Comparing function to arrow function
+function (a) {
+    return a + 100;
+}
+
+// Breaking down to Arrow function equivalent
+(a) => {
+    return a + 100;
+}
+
+(a) => a + 100;
+a => a + 100;
+
+// Can also be with no arguments
+let a = 10;
+let b = 20;
+function() {
+    return a + b + 100;
+}
+
+() => a + b + 100;
+const func = () => a + b + 100;  
+// combining function expression, anonymous function and arrow function
+</code></pre><br>
+                                    </div>
+                                    <div id="callback">
+                                        <h6>Callback functions</h6>
+                                        <p><b>Callback function</b> is a function that is passed into another function as an argument, which is then invoked inside the outer function. It is often used
+                                        to continue code execution after an asynchronous operation has completed (asynchronous callback).</p>
+<pre class="language-javascript">
+<code>// example using callback functions
+function interact(genericInteraction, name) {
+    console.log(genericInteraction(name));
+}
+
+const poke = (name) => { 
+    return `${name} has been poked!`; 
+}
+
+const impeach = (name) => {
+    return `${name} has been impeached for the 2nd time!`;
+}
+
+interact(poke, "Anders");
+interact(impeach, "Donald Trump");
+// output: 
+"Anders has been poked!"
+"Donald Trump has been impeached for the 2nd time!"
+</code></pre><br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#js_4">
+                                    Loops
+                                </button>
+                            </h2>
+                            <div id="js_4" class="accordion-collapse collapse" data-bs-parent="#js_accordion">
+                                <div class="accordion-body bg-light">
+                                    <div id="loops">
+                                        <h6>Loops</h6>
+                                        <p>In JS there are for, for-each, for-in and for-of loops, which we can use on objects, arrays etc. But we aim to use <b>functional approaches</b> wheen looping such as .map(), .reduce(), .find()
+                                            .filter() and the like.<br><br><b>.map()</b> takes a callback that is performed on all elements, then returns a new array with the result.<br><b>.filter()</b> takes a predicate function and 
+                                            returns the elements of an array that meet the condition specified in a callback function.<br><b>.reduce()</b> calls the specified callback function for all the elements in an array. 
+                                            The return value of the callback function is the accumulated result, and is provided as an argument in the next call to the callback function.<br><b>.find()</b> returns the value of the first 
+                                            element in the array where predicate is true, and undefined otherwise.
+                                        </p>
+<pre class="language-javascript">
+<code>// short example using .map() to log index and value
+const failures = ["misclick", "falling down", "skateboard accident", "tiktok fail"];
+
+failures.map((failure, index) => {
+    console.log(index, failure);
+});
+</code></pre><br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Prism code highlight -->
+<script src="./prism.js" type="text/javascript"></script>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<!-- Bootstrap bundle with Popper.js -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+</body>
+</html>

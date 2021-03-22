@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap css -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="./site.css">
+    <link rel="stylesheet" href="./prism.css">
+
+    <title>NodeJS Mandatory</title>
+
+</head>
+<body>
+    <nav class="navbar sticky-top navbar-expand-sm navbar-dark bg-dark px-3 justify-content-center">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/"><i class="fas fa-home"></i> Start</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/js"><i class="fab fa-js-square"></i> Javascript</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/node"><i class="fab fa-node-js"></i> Node.js</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="/express"><i class="fas fa-shipping-fast"></i> Express.js</a>
+            </li>
+        </ul>
+    </nav>
+
+<div class="container py-2">
+    <div id="express" class="row justify-content-center">
+        <div class="col-8">
+            <div class="h3 text-center">Express.js</div>
+                <div class="accordion opacity-4" id="express_accordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#express_1">
+                                What is Express.js?
+                            </button>
+                        </h2>
+                        <div id="express_1" class="accordion-collapse collapse" data-bs-parent="#express_accordion">
+                            <div class="accordion-body bg-light">
+                                <p>Express is a fast, minimalistic web framework that is powerful and easy to use. It makes it very easy to for example build REST API's and serve HTML files.</p>
+                                <p><b>How to get started: </b>run <kbd>npm</kbd> <kbd>install</kbd> <kbd>express</kbd> <kbd>--save</kbd> - this will install the package and add it to package.json</p>
+                                <p>See bare-minimum code below for how to use the module (put this code in a file called index.js)</p>
+<pre class="line-numbers language-javascript"><code>const express = require('express');
+const app = express();
+const PORT = process.env.PORT || 8080;
+
+app.listen(PORT, (error) => {
+    if (error) {
+        console.log(error);
+    } else {
+        console.log(`Server running on port ${PORT}`);
+    }
+});</code></pre>
+                                <p>So what is happening here is:</p>
+                                <ul>
+                                    <li>Express is imported</li>
+                                    <li>Port number for the server is set</li>
+                                    <li>app.listen() starts the server at the given PORT</li>
+                                </ul>
+                                <p>Now it would be possible to open the app in your browser at localhost:&lt;PORT_NUMBER&gt;<br>
+                                Nothing will be shown as we have not defined any routes yet. Go to next section for more on that.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#express_2">
+                                REST API
+                            </button>
+                        </h2>
+                        <div id="express_2" class="accordion-collapse collapse" data-bs-parent="#express_accordion">
+                            <div class="accordion-body bg-light">
+                                <p>Now that we have a running server, in order to make a <b>REST API</b> we need to define some <b>routes</b>. Let's make a simple CRUD example.
+                                    In express we can define the routes very easily by calling the HTTP-mehtods on the app variable. Eg. the <b>'.get()'</b> method is for HTTP GET. The method takes a route as a string,
+                                    and a callback which yields the 'req' and 'res' (as well as 'next'). 'req' is the <b>HTTP request</b> and 'res' is the <b>HTTP response</b>. 'res' has a <b>.send()</b> method which 
+                                    sends whatever we give it as parameter to the client. In this case, we simply send a json object with a message.
+                                </p>
+<pre class="language-js"><code>app.get("/", (req, res) => {
+    res.send({ message: "App is working!" })
+}
+// this is a simple get route for the root of our project</code></pre>
+                                <p>So this is the bare-minimum. The remaining CRUD operations are easy to implement. Let's say our example app is a catalog of songs, so our base route is <b>/songs</b>. For simplicity, we
+                                    keep the data local in our project. Then we add the routes for:</p>
+                                <ul>
+                                    <li>POST /songs - create one or more songs</li>
+                                    <li>GET /songs - get all songs</li>
+                                    <li>GET /songs/:id - get song by id</li>
+                                    <li>PUT /songs/:id - update song by id</li>
+                                    <li>DELETE /songs/:id - delete song by id</li>
+                                </ul>
+                                <p><b>POST:</b></p>
+<pre class="line-numbers language-js" style="max-height: 400px;"><code>let songs = [
+    {id: 1, title: 'A song'}, 
+    {id: 2, title: 'Two Princes'}, 
+    {id: 3, title: 'Jutlandia'}, 
+    {id: 4, title: 'Fade to Black'}
+];
+
+// implementation for POST /songs
+app.post("/songs", (req, res) => {
+    songs = [...songs, ...req.body];
+    res.status(200).json({ songs: req.body });
+})
+
+// implementation for POST /songs/id
+app.post('/songs/:id', (req, res) => {
+    const id = req.params.id;   // we access path variables with .params. Query strings are accesses with .query
+    if (songs.find(song => song.id == id) == undefined) {
+        songs.push(req.body);
+        res.status(200).json(req.body);
+    } else {
+        res.status(500).send({ error: `A song with ID=${id} already exists` });
+    }
+});</code></pre>
+                                <p><b>GET:</b></p>
+<pre class="line-numbers language-js" style="max-height: 400px;"><code>// implementation for GET /songs
+app.get("/songs", (req, res) => {
+    res.status(200).json({ songs: songs });
+});
+
+// implementation for GET /songs/id
+app.get('/songs/:id', (req, res) => {
+    const id = req.params.id;
+    const song = songs.find(song => song.id == id);
+    if (song != undefined) {
+        res.status(200).json({ song: song });
+    } else {
+        res.status(500).send({ error: `A song with ID=${id} doesn't exists` });
+    }
+});</code></pre>
+                                <p><b>PUT:</b></p>
+<pre class="line-numbers language-js" style="max-height: 400px;"><code>// implementation for PUT /songs/id
+app.put('/songs/:id', (req, res) => {
+    const id = req.params.id;
+    const body = req.body;
+    const index = songs.findIndex(song => song.id == id);
+    if (index != -1) {
+        songs[index] = body;
+        res.status(200).send({ song: body });
+    } else {
+        res.status(500).send({ error: `A song with ID=${id} doesn't exists` });
+    }
+});</code></pre>
+                                <p><b>DELETE:</b></p>
+<pre class="line-numbers language-js" style="max-height: 400px;"><code>// implementation for DELETE /songs/id
+app.delete('/songs/:id', (req, res) => {
+    const id = req.params.id;
+    const index = songs.findIndex(song => song.id == id);
+    if (index != -1) {
+        const song = songs.find(song => song.id == id);
+        songs = songs.filter(song => song.id != id);
+        res.status(200).send({ song: song });
+    } else {
+        res.status(500).send({ error: `Can't delete: A song with ID=${id} doesn't exists` });
+    }
+});</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#express_3">
+                                Serving HTML & static files
+                            </button>
+                        </h2>
+                        <div id="express_3" class="accordion-collapse collapse" data-bs-parent="#express_accordion">
+                            <div class="accordion-body bg-light">
+                                <p>Another thing we can do is to serve HTML files. This is done with the <b>.sendFile()</b> method. A smart thing we can do before writing the code for serving HTML is to define which folder
+                                should contain the static public files such as pictures and HTML files. There is a middleware built into express which is called <b>static</b> that we can use to configure the static files location.
+                                </p>
+                                <p>Let's say we have our HTML files and album art placed in a folder called "public" placed in the root of your project.</p>
+<pre class="line-numbers language-js"><code>app.use(express.static("public"));  // configure the root of our public static files
+
+app.get("/", (req, res) => {
+    res.sendFile(__dirname + "/public/&lt;name_of_file&gt;");
+});
+</code></pre>
+                                <p>Now all files in the folder public are available to the client. Eg. you can access files by going to localhost:&lt;port_number&gt;/&lt;name_of_file&gt;</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Prism code highlight -->
+<script src="./prism.js" type="text/javascript"></script>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<!-- Bootstrap bundle with Popper.js -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+</body>
+</html>
